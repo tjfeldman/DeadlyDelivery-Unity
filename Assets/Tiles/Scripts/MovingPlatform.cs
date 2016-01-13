@@ -1,59 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class MovingPlatform : MonoBehaviour {
 
-namespace Tiles
-{
-    public class MovingPlatform : MonoBehaviour
-    {
+    public GameObject platform;         // The platform in the game world that will be moving
+    public float moveSpeed;             // The speed of the platform's movement
+    private Transform targetPoint;      // The point that the platform is currently moving to
+    public Transform[] points;          // All the points the platform will move through
+    public int pointSelection;          // What point in the array are we looking at
 
-        public float xSpeed;             // The speed at which the platform will move on the x-axis
-        private float xUseSpeed;         // The speed to use in the update for horizontal movement
-        float xOrig;                     // The original x-value that the platform will start at
-        public float xDistance;          // Half the distance the platform will travel on the x-axis
-        public bool xStartRight;         // Which direction should the platform start, right or left
-        int xDirection;                  // Modify the starting direction (-1 or 1 / left or right)
-        public float ySpeed;             // The speed at which the platform will move on the y-axis
-        private float yUseSpeed;         // The speed to use in the update for vertical movement
-        float yOrig;                     // The original y-value that the platform will start at
-        public float yDistance;          // Half distance the platform will travel on the y-axis
-        public bool yStartUp;            // Which direction should the platform start, up or down
-        int yDirection;                  // Modify the starting direction (-1 or 1 / down or up)
+	// Use this for initialization
+	void Start () {
+        // Set the first point that we'll be moving towards
+        targetPoint = points[pointSelection];
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        // Moving the platform from its position to the targetPoint at moveSpeed.
+        platform.transform.position = Vector3.MoveTowards(platform.transform.position, targetPoint.position, Time.deltaTime * moveSpeed);
 
-        // Use this for initialization
-        void Start()
+        // Switch to the next targetPoint if we've reached one
+        if(platform.transform.position == targetPoint.position)
         {
-            xDirection = (xStartRight) ? 1 : -1;
-            yDirection = (yStartUp) ? 1 : -1;
-            xUseSpeed = xSpeed * xDirection;
-            yUseSpeed = ySpeed * yDirection;
-            xOrig = transform.position.x;
-            yOrig = transform.position.y;
-            
-        }
+            pointSelection++;
 
-        // Update is called once per frame
-        void Update()
-        {
-            if (xOrig - transform.position.x < -xDistance)
-            {
-                xUseSpeed = -xSpeed; // flip direction and go left
-            }
-            else if (xOrig - transform.position.x > xDistance)
-            {
-                xUseSpeed = xSpeed; // flip direction and go right
-            }
+            // If we've reached the endPoint, continue forward to the first point.
+            if (pointSelection == points.Length)
+                pointSelection = 0;
 
-            if (yOrig - transform.position.y < -yDistance)
-            {
-                yUseSpeed = -ySpeed; // flip direction and go up
-            }
-            else if (yOrig - transform.position.y > yDistance)
-            {
-                yUseSpeed = ySpeed; // flip direction and go down
-            }
-
-            transform.Translate(xUseSpeed * Time.deltaTime, yUseSpeed * Time.deltaTime, 0);
+            targetPoint = points[pointSelection];
         }
     }
 }
