@@ -23,7 +23,10 @@ public class GameCamera : MonoBehaviour {
         }
     }
 
-    // accelerate to the speed we want
+    // Handles the acceleratation and deceleration of the object
+    // @param current - the speed we are currently moving at
+    // @param target - the speed we want to be at
+    // @param accel - the rate at which we should increment the objects's position
     private float IncrementTowards(float current, float target, float accel)
     {
         if (current == target)
