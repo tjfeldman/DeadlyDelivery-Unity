@@ -265,7 +265,7 @@ public class PlayerPhysics : MonoBehaviour {
             //         the direction determined by our calculation earlier
             //         only check as far as how far the player would move
             //         the collisionLayerMask
-            hit = Physics2D.Raycast(rayOrigin, new Vector2(0, dirX), Mathf.Abs(deltaY), collisionMask);
+            hit = Physics2D.Raycast(rayOrigin, new Vector2(dirX, 0), Mathf.Abs(deltaX), collisionMask);
             //did we generate a hit
             if (hit)
             {
