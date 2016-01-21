@@ -20,11 +20,9 @@ public class PlayerController : MonoBehaviour {
         {
             jump = Input.GetButtonDown("Jump");
         }
-    }
-
-	void FixedUpdate () {
         float hDir = Input.GetAxisRaw("Horizontal");    // get's input for the horizontal direction
-        playerPhysics.Move(hDir, jump);                 // move the player
+        float vDir = Input.GetAxisRaw("Vertical");      // get's input for the vertical directoin
+        playerPhysics.Move(hDir, vDir, jump);           // move the player
         jump = false;                                   // reset jump
-	}
+    }
 }
