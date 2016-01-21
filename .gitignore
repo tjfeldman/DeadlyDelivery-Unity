@@ -1,8 +1,13 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Library/
+[Tt]emp/
+[Ll]ibrary/
+[Oo]bj/
+[Bb]uild/
+**_Data/
+*.exe
+*.pdb
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
