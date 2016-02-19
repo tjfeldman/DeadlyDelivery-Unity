@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dfc2f028ff2dc41826973f3f18073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 1.5
+  gravity: 1.2
   maxSpeed: 0.3
   acceleration: 1
-  jumpHeight: 0.6
+  jumpHeight: 0.5
   collisionMask:
     serializedVersion: 2
     m_Bits: 512
@@ -177,11 +177,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gravity
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpHeight
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
