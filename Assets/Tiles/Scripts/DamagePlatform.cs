@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CountdownPlatform : MonoBehaviour {
+public class DamagePlatform : MonoBehaviour {
 
     private const int k_collisionsDivisionX = 10;
     private BoxCollider2D collider;
@@ -15,17 +15,15 @@ public class CountdownPlatform : MonoBehaviour {
     private Vector2 originalOffset; // holds the original offset of the collider
     private Vector2 colliderScale;    // how much have we scaled by
 
-    private bool destroyed = false;
-
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
         collider = GetComponent<BoxCollider2D>();
         p = transform.position;
         colliderScale = transform.localScale;
         originalSize = collider.size;
         originalOffset = collider.offset;
         SetCollider(originalSize, originalOffset);
-    }
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -48,14 +46,14 @@ public class CountdownPlatform : MonoBehaviour {
             //         the collisionLayerMask
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, new Vector2(0, 1), k_distCheck, LayerMask.NameToLayer("Player"));
             //did we generate a hit
-            if (hit.fraction > 0 && !destroyed)
+            if (hit.fraction > 0)
             {
-                destroyed = true;
-                Debug.Log("Destroy Running");
-                Destroy(gameObject, 3);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<PlayerHealth>().takeDamage(10);
             }
         }
-    }
+	
+	}
 
     // sets up our collider
     public void SetCollider(Vector2 size, Vector2 offset)
